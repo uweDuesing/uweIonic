@@ -3,25 +3,16 @@
   android:id="@+id/widget_container"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="#123456"
-  android:gravity="center"
-  android:orientation="vertical">
-
-
+  android:clickable="true"
+  android:focusable="true"
+  android:background="#123456">
 
   <TextView
     android:id="@+id/widget_title"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Title"
-    android:textColor="#FFFFFF"
-    android:textSize="24sp" />
+    android:text="Hello Widget World!"
+    android:gravity="center"
+    android:padding="16dp" />
 
-  <TextView
-    android:id="@+id/widget_text"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Hello World!"
-    android:textColor="#FFFFFF"
-    android:textSize="18sp" />
 </LinearLayout>

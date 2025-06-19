@@ -9,8 +9,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import io.ionic.starter.R;
+import io.ionic.starter.MainActivity; // Add this import
 import android.app.PendingIntent;
 import android.content.Intent;
+
 public class WeatherWidgetsReceiver extends AppWidgetProvider {
 
   private static final String TAG = "WeatherWidget";
@@ -24,19 +26,23 @@ public class WeatherWidgetsReceiver extends AppWidgetProvider {
 
     views.setTextViewText(R.id.widget_title, "Title!");
 
-    // Create an Intent to launch the app
-    Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
-    if (launchIntent != null) {
-      PendingIntent pendingIntent = PendingIntent.getActivity(
-        context,
-        0,
-        launchIntent,
-        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
-      );
+    // Create an explicit Intent to launch MainActivity
+    Intent launchIntent = new Intent(context, MainActivity.class);
+    launchIntent.setAction(Intent.ACTION_MAIN);
+    launchIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+    launchIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-      // Set the click action on the whole widget or a specific view
-      views.setOnClickPendingIntent(R.id.widget_container, pendingIntent);
-    }
+    PendingIntent pendingIntent = PendingIntent.getActivity(
+      context,
+      appWidgetId, // Use unique request code for each widget
+      launchIntent,
+      PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+    );
+
+    // Set the click action on the whole widget container
+    views.setOnClickPendingIntent(R.id.widget_container, pendingIntent);
+
+    Log.d(TAG, "PendingIntent created for widget " + appWidgetId);
 
     appWidgetManager.updateAppWidget(appWidgetId, views);
     Log.d(TAG, "Widget updated with ID: " + appWidgetId + " at " + currentTime);
