@@ -35,3 +35,12 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+// Handle safe areas for fullscreen content
+ion-content[fullscreen] {
+  --padding-bottom: env(safe-area-inset-bottom);
+}
+
+// Ensure tab bar respects safe area
+ion-tab-bar {
+  padding-bottom: var(--ion-safe-area-bottom);
+}
